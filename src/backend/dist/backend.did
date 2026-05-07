@@ -1,0 +1,162 @@
+type Timestamp = int;
+type TeacherId = nat;
+type Teacher = 
+ record {
+   id: TeacherId;
+   name: text;
+   "principal": principal;
+ };
+type SubmitAttemptRequest = 
+ record {
+   answers: vec text;
+   quizId: QuizId;
+   studentId: StudentId;
+ };
+type StudentProgress = 
+ record {
+   flag: ProgressFlag;
+   latestAttempts: vec QuizAttempt;
+   latestScores: vec nat;
+   studentId: StudentId;
+ };
+type StudentId = nat;
+type Student = 
+ record {
+   createdAt: Timestamp;
+   grade: Grade;
+   id: StudentId;
+   languagePreference: Language;
+   name: text;
+ };
+type QuizId = nat;
+type QuizAttempt = 
+ record {
+   answers: vec text;
+   id: AttemptId;
+   quizId: QuizId;
+   score: nat;
+   studentId: StudentId;
+   timestamp: Timestamp;
+   totalQuestions: nat;
+ };
+type Quiz = 
+ record {
+   createdAt: Timestamp;
+   gradeLevel: Grade;
+   id: QuizId;
+   questions: vec Question;
+   subject: text;
+   title: text;
+ };
+type QuestionType = 
+ variant {
+   multipleChoice;
+   shortAnswer;
+ };
+type QuestionId = nat;
+type Question = 
+ record {
+   correctAnswer: text;
+   id: QuestionId;
+   options: vec text;
+   questionType: QuestionType;
+   "text": text;
+ };
+type ProgressFlag = 
+ variant {
+   green;
+   red;
+   yellow;
+ };
+type NoteId = nat;
+type LessonId = nat;
+type Lesson = 
+ record {
+   content: text;
+   createdAt: Timestamp;
+   gradeLevel: Grade;
+   id: LessonId;
+   language: Language;
+   subject: text;
+   title: text;
+ };
+type Language = 
+ variant {
+   english;
+   hindi;
+   odia;
+ };
+type Grade = 
+ variant {
+   lkg;
+   std1;
+   std10;
+   std2;
+   std3;
+   std4;
+   std5;
+   std6;
+   std7;
+   std8;
+   std9;
+   ukg;
+ };
+type CreateTeacherRequest = record {name: text;};
+type CreateStudentRequest = 
+ record {
+   grade: Grade;
+   languagePreference: Language;
+   name: text;
+ };
+type CreateQuizRequest = 
+ record {
+   gradeLevel: Grade;
+   questions: vec Question;
+   subject: text;
+   title: text;
+ };
+type CreateNoteRequest = 
+ record {
+   content: text;
+   studentId: StudentId;
+   subject: text;
+   teacherId: TeacherId;
+ };
+type CreateLessonRequest = 
+ record {
+   content: text;
+   gradeLevel: Grade;
+   language: Language;
+   subject: text;
+   title: text;
+ };
+type CoachingNote = 
+ record {
+   content: text;
+   id: NoteId;
+   studentId: StudentId;
+   subject: text;
+   teacherId: TeacherId;
+   timestamp: Timestamp;
+ };
+type AttemptId = nat;
+service : {
+  addCoachingNote: (req: CreateNoteRequest) -> (CoachingNote);
+  createLesson: (req: CreateLessonRequest) -> (Lesson);
+  createQuiz: (req: CreateQuizRequest) -> (Quiz);
+  createStudent: (req: CreateStudentRequest) -> (Student);
+  createTeacher: (req: CreateTeacherRequest) -> (Teacher);
+  getAttemptDetail: (attemptId: AttemptId) -> (opt QuizAttempt) query;
+  getCoachingNotesForStudent: (studentId: StudentId) ->
+   (vec CoachingNote) query;
+  getLessonsByGrade: (grade: Grade) -> (vec Lesson) query;
+  getQuiz: (id: QuizId) -> (opt Quiz) query;
+  getStudent: (id: StudentId) -> (opt Student) query;
+  getStudentAttempts: (studentId: StudentId) -> (vec QuizAttempt) query;
+  getStudentProgress: (studentId: StudentId) -> (StudentProgress) query;
+  getTeacher: (id: TeacherId) -> (opt Teacher) query;
+  listQuizzesByGrade: (grade: Grade) -> (vec Quiz) query;
+  listStudents: (gradeFilter: opt Grade) -> (vec Student) query;
+  submitQuizAttempt: (req: SubmitAttemptRequest) -> (QuizAttempt);
+  updateStudentLanguage: (id: StudentId, language: Language) -> (bool);
+}

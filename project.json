@@ -1,0 +1,30 @@
+{
+  "overview": "An adaptive smart coaching platform for students from LKG to Standard 10. Teachers watch student quiz discussions, understand progress and improvement areas, and deliver personalized coaching notes. Supports Odia, Hindi, and English languages.",
+  "features": [
+    "Student registration with grade (LKG–Std 10) and language preference",
+    "Lessons and subject quizzes (multiple choice + short answer)",
+    "Teacher dashboard with student performance, grade filters, and red/yellow/green progress flags",
+    "Personalized coaching notes from teacher to each student",
+    "Multi-language UI: Odia, Hindi, English toggle",
+    "Role-based access: student view and teacher admin view",
+    "Quiz attempt history and coaching feedback timeline per student"
+  ],
+  "category": "education",
+  "tags": [
+    "education",
+    "coaching",
+    "adaptive-learning",
+    "students",
+    "teacher",
+    "multi-language",
+    "odia",
+    "hindi",
+    "english",
+    "lkg",
+    "standard-10",
+    "quiz",
+    "personalized",
+    "feedback"
+  ],
+  "last_updated": "2026-05-07T18:20:38.190Z"
+}

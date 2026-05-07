@@ -1,0 +1,179 @@
+// Version: 1.0.0
+type AttemptId__526662454 = Nat;
+type CoachingNote__967470876 =
+  {
+    content : Text;
+    id : NoteId__455621381;
+    studentId : StudentId__387618262;
+    subject : Text;
+    teacherId : TeacherId__123394365;
+    timestamp : Timestamp__301639476
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Grade__885506212 =
+  {
+    #lkg;
+    #std1;
+    #std10;
+    #std2;
+    #std3;
+    #std4;
+    #std5;
+    #std6;
+    #std7;
+    #std8;
+    #std9;
+    #ukg
+  };
+type Int__270357528 = Int__616954475;
+type Int__616954475 = Int;
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Language__22065978 = {#english; #hindi; #odia};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type LessonId__839229898 = Nat;
+type Lesson__686501298 =
+  {
+    content : Text;
+    createdAt : Timestamp__301639476;
+    gradeLevel : Grade__885506212;
+    id : LessonId__839229898;
+    language : Language__22065978;
+    subject : Text;
+    title : Text
+  };
+type Map__158565046<K, V> = Map__297112838<K, V>;
+type Map__297112838<K, V> =
+  {var root : Node__46230540<K, V>; var size : Nat__490723111};
+type Map__605269027<K, V> = Map__158565046<K, V>;
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type NoteId__455621381 = Nat;
+type QuestionId__204821715 = Nat;
+type QuestionType__952237516 = {#multipleChoice; #shortAnswer};
+type Question__496803352 =
+  {
+    correctAnswer : Text;
+    id : QuestionId__204821715;
+    options : [Text];
+    questionType : QuestionType__952237516;
+    text : Text
+  };
+type QuizAttempt__529564763 =
+  {
+    answers : [Text];
+    id : AttemptId__526662454;
+    quizId : QuizId__432224925;
+    score : Nat;
+    studentId : StudentId__387618262;
+    timestamp : Timestamp__301639476;
+    totalQuestions : Nat
+  };
+type QuizId__432224925 = Nat;
+type Quiz__713271105 =
+  {
+    createdAt : Timestamp__301639476;
+    gradeLevel : Grade__885506212;
+    id : QuizId__432224925;
+    questions : [Question__496803352];
+    subject : Text;
+    title : Text
+  };
+type StudentId__387618262 = Nat;
+type Student__1072795660 =
+  {
+    createdAt : Timestamp__301639476;
+    grade : Grade__885506212;
+    id : StudentId__387618262;
+    languagePreference : Language__22065978;
+    name : Text
+  };
+type TeacherId__123394365 = Nat;
+type Teacher__818831118 =
+  {id : TeacherId__123394365; name : Text; principal : Principal};
+type Time__796480547 = Int__270357528;
+type Time__900049286 = Time__796480547;
+type Timestamp__301639476 = Time__900049286;
+actor {
+  stable _coachingState :
+    {
+      counter : {var nextLessonId : Nat; var nextNoteId : Nat};
+      lessons : Map__605269027<LessonId__839229898, Lesson__686501298>;
+      notes : Map__605269027<NoteId__455621381, CoachingNote__967470876>
+    };
+  stable _quizState :
+    {
+      attempts : Map__605269027<AttemptId__526662454, QuizAttempt__529564763>;
+      counter : {var nextAttemptId : Nat; var nextQuizId : Nat};
+      quizzes : Map__605269027<QuizId__432224925, Quiz__713271105>
+    };
+  stable _studentState :
+    {
+      counter : {var nextStudentId : Nat};
+      students : Map__605269027<StudentId__387618262, Student__1072795660>
+    };
+  stable _teacherState :
+    {
+      counter : {var nextTeacherId : Nat};
+      teachers : Map__605269027<TeacherId__123394365, Teacher__818831118>
+    };
+  stable attempts :
+    {
+      var root : Node__46230540<AttemptId__526662454, QuizAttempt__529564763>;
+      var size : Nat__490723111
+    };
+  stable coachingCounter : {var nextLessonId : Nat; var nextNoteId : Nat};
+  stable coachingState :
+    {
+      counter : {var nextLessonId : Nat; var nextNoteId : Nat};
+      lessons : Map__605269027<LessonId__839229898, Lesson__686501298>;
+      notes : Map__605269027<NoteId__455621381, CoachingNote__967470876>
+    };
+  stable lessons :
+    {
+      var root : Node__46230540<LessonId__839229898, Lesson__686501298>;
+      var size : Nat__490723111
+    };
+  stable notes :
+    {
+      var root : Node__46230540<NoteId__455621381, CoachingNote__967470876>;
+      var size : Nat__490723111
+    };
+  stable quizCounter : {var nextAttemptId : Nat; var nextQuizId : Nat};
+  stable quizState :
+    {
+      attempts : Map__605269027<AttemptId__526662454, QuizAttempt__529564763>;
+      counter : {var nextAttemptId : Nat; var nextQuizId : Nat};
+      quizzes : Map__605269027<QuizId__432224925, Quiz__713271105>
+    };
+  stable quizzes :
+    {
+      var root : Node__46230540<QuizId__432224925, Quiz__713271105>;
+      var size : Nat__490723111
+    };
+  stable studentCounter : {var nextStudentId : Nat};
+  stable studentState :
+    {
+      counter : {var nextStudentId : Nat};
+      students : Map__605269027<StudentId__387618262, Student__1072795660>
+    };
+  stable students :
+    {
+      var root : Node__46230540<StudentId__387618262, Student__1072795660>;
+      var size : Nat__490723111
+    };
+  stable teacherCounter : {var nextTeacherId : Nat};
+  stable teacherState :
+    {
+      counter : {var nextTeacherId : Nat};
+      teachers : Map__605269027<TeacherId__123394365, Teacher__818831118>
+    };
+  stable teachers :
+    {
+      var root : Node__46230540<TeacherId__123394365, Teacher__818831118>;
+      var size : Nat__490723111
+    }
+};

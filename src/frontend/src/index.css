@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Fraunces";
+    --font-body: "DM Sans";
+    --font-mono: monospace;
+    --radius: 0.625rem;
+
+    --background: 0.98 0.01 230;
+    --foreground: 0.18 0.02 230;
+    --card: 1.0 0 0;
+    --card-foreground: 0.18 0.02 230;
+    --popover: 1.0 0 0;
+    --popover-foreground: 0.18 0.02 230;
+
+    --primary: 0.48 0.18 150;
+    --primary-foreground: 0.98 0 0;
+
+    --secondary: 0.95 0.01 230;
+    --secondary-foreground: 0.28 0.02 230;
+    --muted: 0.92 0.01 230;
+    --muted-foreground: 0.5 0.01 230;
+
+    --accent: 0.65 0.15 70;
+    --accent-foreground: 0.98 0 0;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+
+    --border: 0.88 0.01 230;
+    --input: 0.88 0.01 230;
+    --ring: 0.48 0.18 150;
+
+    --chart-1: 0.55 0.22 25;
+    --chart-2: 0.72 0.15 85;
+    --chart-3: 0.6 0.18 150;
+    --chart-4: 0.65 0.15 70;
+    --chart-5: 0.48 0.18 150;
+
+    --sidebar: 0.98 0 0;
+    --sidebar-foreground: 0.18 0.02 230;
+    --sidebar-primary: 0.48 0.18 150;
+    --sidebar-primary-foreground: 0.98 0 0;
+    --sidebar-accent: 0.92 0.01 230;
+    --sidebar-accent-foreground: 0.28 0.02 230;
+    --sidebar-border: 0.88 0.01 230;
+    --sidebar-ring: 0.48 0.18 150;
+  }
+
+  .dark {
+    --background: 0.13 0.01 230;
+    --foreground: 0.92 0.01 230;
+    --card: 0.17 0.015 230;
+    --card-foreground: 0.92 0.01 230;
+    --popover: 0.22 0.02 230;
+    --popover-foreground: 0.92 0.01 230;
+
+    --primary: 0.65 0.18 150;
+    --primary-foreground: 0.13 0.01 230;
+
+    --secondary: 0.22 0.01 230;
+    --secondary-foreground: 0.85 0.01 230;
+    --muted: 0.22 0.01 230;
+    --muted-foreground: 0.55 0.01 230;
+
+    --accent: 0.75 0.15 70;
+    --accent-foreground: 0.13 0.01 230;
+
+    --destructive: 0.65 0.19 25;
+    --destructive-foreground: 0.92 0.01 230;
+
+    --border: 0.28 0.015 230;
+    --input: 0.28 0.015 230;
+    --ring: 0.65 0.18 150;
+
+    --chart-1: 0.55 0.22 25;
+    --chart-2: 0.72 0.15 85;
+    --chart-3: 0.6 0.18 150;
+    --chart-4: 0.75 0.15 70;
+    --chart-5: 0.65 0.18 150;
+
+    --sidebar: 0.17 0.015 230;
+    --sidebar-foreground: 0.92 0.01 230;
+    --sidebar-primary: 0.65 0.18 150;
+    --sidebar-primary-foreground: 0.13 0.01 230;
+    --sidebar-accent: 0.22 0.01 230;
+    --sidebar-accent-foreground: 0.85 0.01 230;
+    --sidebar-border: 0.28 0.015 230;
+    --sidebar-ring: 0.65 0.18 150;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+}
+@layer utilities {
+  .status-flag-red {
+    @apply inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-semibold;
+    background-color: oklch(0.55 0.22 25 / 0.12);
+    color: oklch(0.45 0.22 25);
+  }
+  .status-flag-yellow {
+    @apply inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-semibold;
+    background-color: oklch(0.72 0.15 85 / 0.12);
+    color: oklch(0.52 0.14 85);
+  }
+  .status-flag-green {
+    @apply inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-semibold;
+    background-color: oklch(0.6 0.18 150 / 0.12);
+    color: oklch(0.45 0.18 150);
+  }
+  .coaching-button {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-accent text-accent-foreground font-semibold text-sm transition-smooth hover:opacity-90 active:scale-95;
+  }
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
